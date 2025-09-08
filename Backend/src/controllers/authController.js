@@ -8,7 +8,7 @@ export const userRegister = async (req, res) => {
 
     let existingUser = await userModel.findOne({email});
     if (existingUser) {
-        return res.json({message: "Email already exists"});
+        return res.status(409).json({message: "Email already exists"});
     }
 
     try {
@@ -23,7 +23,7 @@ export const userRegister = async (req, res) => {
             secure: true
         });
 
-        res.send({message: "User Created Successfully."});
+        res.status(201).send({message: "User Created Successfully."});
     } catch (e) {
         return res.send({message: "Something went wrong", error: e.message});
     }
@@ -34,14 +34,14 @@ export const userLogin = async (req, res) => {
 
     let isExists = await userModel.findOne({email});
     if (!isExists) {
-        return res.send({message: "Invalid email or password"});
+        return res.status(401).send({message: "Invalid email or password"});
     }
 
     try {
         let isPasswordSame = await isExists.comparePassword(password);
         
         if (!isPasswordSame) {
-            return res.send({message: "Something went wrong.", error: e.message});
+            return res.status(401).send({message: "Something went wrong."});
         }
 
         let token = signUserJWT(isExists._id);
@@ -52,9 +52,9 @@ export const userLogin = async (req, res) => {
             secure: true
         });
 
-        res.send({message: "Login Successfully"});
+        res.status(200).send({message: "Login Successfully"});
     } catch (e) {
-        res.send({message: "Something went wrong.", error: e.message});
+        return res.status(401).send({message: "Something went wrong."});
     }
 }
 export const userLogout = async (req, res) => {
@@ -64,15 +64,15 @@ export const userLogout = async (req, res) => {
 
 // FOOD PARTNER AUTH ENDPOINTS
 export const partnerRegister = async (req, res) => {
-    const {username, email, password} = req.body;
+    const {kitchenName, email, phone, password} = req.body;
 
     let existingPartner = await partnerModel.findOne({email});
     if (existingPartner) {
-        return res.json({message: "Email already exists"});
+        return res.status(409).json({message: "Email already exists"});
     }
 
     try {
-        const newPartner = new partnerModel({username, email, password});
+        const newPartner = new partnerModel({kitchenName, phone, email, password});
         await newPartner.save();
         
         let token = signPartnerJWT(newPartner._id);
@@ -83,9 +83,9 @@ export const partnerRegister = async (req, res) => {
             secure: true
         });
 
-        res.send({message: "Food Partner Created Successfully."});
+        res.status(201).send({message: "Food Partner Created Successfully."});
     } catch (e) {
-        return res.send({message: "Something went wrong", error: e.message});
+        return res.status(409).send({message: "Something went wrong"});
     }
 
 }
@@ -94,14 +94,14 @@ export const partnerLogin = async (req, res) => {
 
     let isExists = await partnerModel.findOne({email});
     if (!isExists) {
-        return res.send({message: "Invalid email or password"});
+        return res.status(401).send({message: "Invalid email or password"});
     }
 
     try {
         let isPasswordSame = await isExists.comparePassword(password);
         
         if (!isPasswordSame) {
-            return res.send({message: "Something went wrong.", error: e.message});
+            return res.status(200).send({message: "Something went wrong.", error: e.message});
         }
 
         let token = signPartnerJWT(isExists._id);
@@ -112,9 +112,9 @@ export const partnerLogin = async (req, res) => {
             secure: true
         });
 
-        res.send({message: "Login Successfully"});
+        res.status(200).send({message: "Login Successfully"});
     } catch (e) {
-        res.send({message: "Something went wrong.", error: e.message});
+        res.status(401).send({message: "Something went wrong.", error: e.message});
     }
 }
 export const partnerLogout = async (req, res) => {

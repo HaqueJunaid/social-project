@@ -1,0 +1,132 @@
+@import "./variables.css";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+.reel-root {
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+.reels {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.reel {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.video-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-wrap::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to top, #000 -30%, transparent);
+    left: 0;
+    bottom: 0;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.reel-info {
+  position: absolute;
+  left: 14px;
+  right: 80px;
+  bottom: 24px;
+  color: var(--primary-contrast);
+}
+
+.profile {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 100%;
+    position: relative;
+}
+
+.avatar .circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.meta .user {
+  font-weight: 700;
+  font-size: 18px;
+  list-style: 0;
+  color: var(--text);
+}
+
+.meta .caption {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 3px;
+  text-transform: capitalize;
+}
+
+@media (prefers-color-scheme: light) {
+  .action {
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--text);
+  }
+  .reel-info {
+    color: var(--text);
+  }
+  .avatar {
+    border: 2px solid rgba(0, 0, 0, 0.06);
+  }
+}
+
+.back-button {
+    position: absolute;
+    z-index: 99;
+    text-decoration: none;
+    top: 10px;
+    left: 10px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+
+}
+
+.back-button i {
+    font-size: 32px;
+    color: var(--text);
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.back-button span {
+    margin-top: -2px;
+    line-height: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
