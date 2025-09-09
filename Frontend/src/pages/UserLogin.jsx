@@ -2,6 +2,7 @@ import "../styles/auth.css";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Logo from "../components/Logo";
 
 export default function UserLogin() {
   const navigator = useNavigate();
@@ -33,6 +34,7 @@ export default function UserLogin() {
 
   return (
     <main className="auth-root">
+  <div style={{position:'absolute', left:20, top:20}}><Logo size={28} /></div>
       <form
         className="card auth-card"
         onSubmit={handleSubmit(onSubmit)}
@@ -63,9 +65,13 @@ export default function UserLogin() {
 
         <div className="actions">
           <input type="submit" className="btn primary" value={"Sign In"} />
-          <NavLink className="link muted" to="/user/registration">
+          <NavLink className="link muted" to="/foodmato/user/registration">
             Create an account
           </NavLink>
+          <div style={{display: 'flex', gap: 10}}>
+            <NavLink className="link" to="/foodmato/partner/login">Partner login</NavLink>
+            <NavLink className="link" to="/foodmato/partner/registration">Partner register</NavLink>
+          </div>
         </div>
       </form>
     </main>

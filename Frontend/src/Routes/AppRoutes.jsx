@@ -1,22 +1,36 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import UserRegister from "../pages/UserRegister"
-import UserLogin from "../pages/UserLogin"
-import FoodPartnerRegister from "../pages/FoodPartnerRegister"
-import FoodPartnerLogin from "../pages/FoodPartnerLogin"
-import ReelScroller from "../pages/ReelScroller"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UserRegister from "../pages/UserRegister";
+import UserLogin from "../pages/UserLogin";
+import FoodPartnerRegister from "../pages/FoodPartnerRegister";
+import FoodPartnerLogin from "../pages/FoodPartnerLogin";
+import ReelScroller from "../pages/ReelScroller";
+import Landing from "../pages/Landing";
+import FoodPartnerAddListing from "../pages/FoodPartnerAddListing";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<><ReelScroller /></>} />
-        <Route path="/user/registration" element={<UserRegister />} />
-        <Route path="/user/login" element={<UserLogin />} />
-        <Route path="/foodpartner/registration" element={<FoodPartnerRegister />} />
-        <Route path="/foodpartner/login" element={<FoodPartnerLogin />} />
+        <Route path="/foodmato" element={<Landing />} />
+        <Route
+          path="/foodmato/reels"
+          element={
+            <>
+              <ReelScroller />
+            </>
+          }
+        />
+        <Route path="/foodmato/new" element={<FoodPartnerAddListing />} />
+        <Route path="/foodmato/user/registration" element={<UserRegister />} />
+        <Route path="/foodmato/user/login" element={<UserLogin />} />
+        <Route
+          path="/foodmato/partner/registration"
+          element={<FoodPartnerRegister />}
+        />
+        <Route path="/foodmato/partner/login" element={<FoodPartnerLogin />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default AppRoutes
+export default AppRoutes;

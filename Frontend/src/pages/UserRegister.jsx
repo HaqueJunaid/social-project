@@ -1,5 +1,7 @@
 import "../styles/auth.css";
-
+import Logo from "../components/Logo";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 import { useNavigate, NavLink } from "react-router-dom";
 
 
@@ -35,6 +37,7 @@ export default function UserRegister() {
 
   return (
     <main className="auth-root">
+  <div style={{position:'absolute', left:20, top:20}}><Logo size={28} /></div>
       <form
         className="card auth-card"
         aria-label="User registration form"
@@ -76,8 +79,11 @@ export default function UserRegister() {
             className="btn primary"
             value={"Create account"}
           />
-          <NavLink className="link muted" to="/user/login">
+          <NavLink className="link muted" to="/foodmato/user/login">
             Already have an account?
+          </NavLink>
+          <NavLink className="link" to="/foodmato/partner/registration">
+            Register as Food Partner
           </NavLink>
         </div>
       </form>

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/reel.css";
 
 export default function ReelScroller() {
+  const navigator = useNavigate();
   const containerRef = useRef(null);
   const observerRef = useRef(null);
   const [reels, setReels] = useState([]);
@@ -11,7 +12,6 @@ export default function ReelScroller() {
     fetch("http://localhost:3000/api/food")
       .then((res) => res.json())
         .then((data) => {
-            console.log(data);
             setReels(data);
         })
     .catch((err) => {
@@ -89,10 +89,10 @@ export default function ReelScroller() {
 
   return (
     <div className="reel-root">
-        <NavLink className="back-button" to={"/user/login"}>
+        <div className="back-button" onClick={() => {navigator(-1)}}>
             <i class="ri-arrow-left-s-line"></i>
             <span>Back</span>
-        </NavLink>
+        </div>
       <div className="reels" ref={containerRef}>
         {reels.map((r, index) => {
           const key = (r && (r._id || r.id)) ? (r._id || r.id) : index;
