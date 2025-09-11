@@ -3,14 +3,11 @@ import Logo from "../components/Logo";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate, NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { LoginContext } from "../Hooks/LoginProvider";
 
 
 export default function UserRegister() {
   const navigator = useNavigate();
   const { register, handleSubmit } = useForm();
-  const {setIsLogin} = useContext(LoginContext);
   const onSubmit = (data) => {
     axios
       .post(
@@ -25,17 +22,14 @@ export default function UserRegister() {
       .then((result) => {
         if (result.status === 201) {
           alert("Registration successful!");
-          setIsLogin(true);
           navigator("/foodmato");
         }
       })
       .catch((err) => {
         if (err.response && err.response.status === 409) {
           alert("User already exists. Please log in.");
-          setIsLogin(false)
         } else {
           alert("Something went wrong. Try again.");
-          setIsLogin(false)
         }
       });
   };

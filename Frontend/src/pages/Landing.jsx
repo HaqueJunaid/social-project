@@ -1,15 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import '../styles/landing.css'
 import Logo from '../components/Logo'
-import { LoginContext } from '../Hooks/LoginProvider'
-import { useContext } from 'react'
 
 export default function Landing() {
-
-  const {isLogin} = useContext(LoginContext);
-  console.log(isLogin ? "Yes": "false");
-  
-
   return (
     <div className="landing-root">
       <header className="lm-header">

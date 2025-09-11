@@ -3,13 +3,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import Logo from '../components/Logo';
-import { useContext } from "react";
-import { LoginContext } from "../Hooks/LoginProvider";
 
 export default function FoodPartnerLogin() {
   const navigator = useNavigate();
   const { register, handleSubmit } = useForm();
-  const {setIsLogin} = useContext(LoginContext);
   const onSubmit = (data) => {
     axios.post(
       "http://localhost:3000/api/auth/foodPartner/login",
@@ -21,17 +18,14 @@ export default function FoodPartnerLogin() {
       .then((result) => {
         if (result.status === 200) {
           alert("Login successful");
-          setIsLogin(true)
           navigator("/foodmato");
         }
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
           alert(err.response.data.message);
-          setIsLogin(false)
         } else {
           alert(err.response.data.message);
-          setIsLogin(false)
         }
       });
   }
