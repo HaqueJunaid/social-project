@@ -3,10 +3,13 @@ import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Logo from "../components/Logo";
+import { useContext } from "react";
+import { LoginContext } from "../Hooks/LoginProvider";
 
 export default function UserLogin() {
   const navigator = useNavigate();
   const { register, handleSubmit } = useForm();
+  const {setIsLogin} = useContext(LoginContext);
   const onSubmit = (data) => {
     axios
       .post(
@@ -20,14 +23,17 @@ export default function UserLogin() {
       .then((result) => {
         if (result.status === 200) {
           alert("Login successful");
-          navigator("/");
+          setIsLogin(true);
+          navigator("/foodmato");
         }
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
           alert(err.response.data.message);
+          setIsLogin(false);
         } else {
           alert("Something went wrong. Try again.");
+          setIsLogin(false);
         }
       });
   };
