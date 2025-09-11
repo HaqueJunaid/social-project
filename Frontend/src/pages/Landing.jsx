@@ -2,7 +2,19 @@ import { NavLink } from 'react-router-dom'
 import '../styles/landing.css'
 import Logo from '../components/Logo'
 
+function getCookie(name) {
+  const cookies = document.cookie.split("; ");
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split("=");
+    if (key === name) return value;
+  }
+  return null;
+}
+
 export default function Landing() {
+  // check cookie on every render (client-side). Backend must set httpOnly=false for this to work.
+  const isLogged = Boolean(getCookie('sessionId'))
+
   return (
     <div className="landing-root">
       <header className="lm-header">
@@ -12,8 +24,14 @@ export default function Landing() {
           </div>
 
           <nav className="nav">
-            <NavLink className="nav-link" to="/foodmato/user/login">Login</NavLink>
-            <NavLink className="btn nav-cta" to="/foodmato/user/registration">Sign up</NavLink>
+            {!isLogged ? (
+              <>
+                <NavLink className="nav-link" to="/user/login">Login</NavLink>
+                <NavLink className="btn nav-cta" to="/user/registration">Sign up</NavLink>
+              </>
+            ) : (
+              <NavLink className="btn nav-cta" to="/dashboard">Dashboard</NavLink>
+            )}
           </nav>
         </div>
       </header>
@@ -23,12 +41,10 @@ export default function Landing() {
           <section className="hero-copy">
             <h1 className="hero-title">Taste the city, one reel at a time</h1>
             <p className="lead">Short food reels. Fast orders. Local flavours.</p>
-            {
-              <div className="hero-ctas">
-              <NavLink className="btn primary large" to="/foodmato/user/registration">Get started</NavLink>
+            <div className="hero-ctas">
+              <NavLink className="btn primary large" to="/user/registration">Get started</NavLink>
               <NavLink className="btn ghost" to="/foodmato/reels">Explore reels</NavLink>
             </div>
-            }
           </section>
 
           <aside className="hero-preview" aria-hidden>
