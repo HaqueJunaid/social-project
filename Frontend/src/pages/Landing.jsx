@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import '../styles/landing.css'
 import Logo from '../components/Logo'
+import axios from 'axios';
 
 function getCookie(name) {
   const cookies = document.cookie.split("; ");
@@ -14,6 +15,11 @@ function getCookie(name) {
 export default function Landing() {
   // check cookie on every render (client-side). Backend must set httpOnly=false for this to work.
   const isLogged = Boolean(getCookie('sessionId'))
+  function handleLogOut() {
+    axios.get("http://localhost:3000/api/auth/logout", {withCredentials: true})
+      .then(() => window.location.reload())
+      .catch(err => console.error("Logout error:", err))
+  }
 
   return (
     <div className="landing-root">
@@ -26,11 +32,11 @@ export default function Landing() {
           <nav className="nav">
             {!isLogged ? (
               <>
-                <NavLink className="nav-link" to="/user/login">Login</NavLink>
-                <NavLink className="btn nav-cta" to="/user/registration">Sign up</NavLink>
+                <NavLink className="nav-link" to="/foodmato/user/login">Login</NavLink>
+                <NavLink className="btn nav-cta" to="/foodmato/user/registration">Sign up</NavLink>
               </>
             ) : (
-              <NavLink className="btn nav-cta" to="/dashboard">Dashboard</NavLink>
+              <button className="btn ghost" onClick={handleLogOut}>Log Out</button>
             )}
           </nav>
         </div>

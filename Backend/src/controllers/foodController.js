@@ -4,14 +4,15 @@ import foodModel from "../models/food.model.js";
 import {v4 as uuid} from "uuid";
 
 export const addFood = async (req, res) => {  
-    let { name, description } = req.body;
+    console.log(req.body, req.file);
+    let { title, description } = req.body;
     let userId = req.pId;
     
     try {  
         let result = await uploadImage(req.file.buffer, uuid());
 
         let newFood = await foodModel.create({
-            name, description, video: result.url, owner: userId
+            name: title, description, video: result.url, owner: userId
         })
 
         if (!newFood) {

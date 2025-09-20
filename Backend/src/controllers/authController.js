@@ -15,11 +15,11 @@ export const userRegister = async (req, res) => {
         const newUser = new userModel({username, email, password});
         await newUser.save();
         
-        let token = signUserJWT(newUser._id);
+        let token = await signUserJWT(newUser._id);
 
         res.cookie('sessionId', token, {
             maxAge: 7*24*60*60*1000, 
-            httpOnly: true,
+            httpsOnly: false,
             secure: true
         });
 
@@ -44,11 +44,11 @@ export const userLogin = async (req, res) => {
             return res.status(401).send({message: "Something went wrong."});
         }
 
-        let token = signUserJWT(isExists._id);
+        let token = await signUserJWT(isExists._id);
 
         res.cookie('sessionId', token, {
             maxAge: 7*24*60*60*1000, 
-            httpOnly: true,
+            httpOnly: false,
             secure: true
         });
 
@@ -56,10 +56,6 @@ export const userLogin = async (req, res) => {
     } catch (e) {
         return res.status(401).send({message: "Something went wrong."});
     }
-}
-export const userLogout = async (req, res) => {
-    res.clearCookie("sessionId");
-    res.send({message: "Logging out."});
 }
 
 // FOOD PARTNER AUTH ENDPOINTS
@@ -72,20 +68,21 @@ export const partnerRegister = async (req, res) => {
     }
 
     try {
-        const newPartner = new partnerModel({kitchenName, phone, email, password});
-        await newPartner.save();
-        
-        let token = signPartnerJWT(newPartner._id);
+
+        let newPartner = await partnerModel.create({kitchenName, phone, email, password});
+
+        let token = await signPartnerJWT(newPartner._id);
 
         res.cookie('sessionId', token, {
             maxAge: 7*24*60*60*1000, 
-            httpOnly: true,
+            httpsOnly: false,
             secure: true
         });
-
+        
+        console.log(4);
         res.status(201).send({message: "Food Partner Created Successfully."});
     } catch (e) {
-        return res.status(409).send({message: "Something went wrong"});
+        return res.status(409).send({e});
     }
 
 }
@@ -104,11 +101,11 @@ export const partnerLogin = async (req, res) => {
             return res.status(200).send({message: "Something went wrong.", error: e.message});
         }
 
-        let token = signPartnerJWT(isExists._id);
+        let token = await signPartnerJWT(isExists._id);
 
         res.cookie('sessionId', token, {
             maxAge: 7*24*60*60*1000, 
-            httpOnly: true,
+            httpsOnly: false,
             secure: true
         });
 
@@ -117,7 +114,10 @@ export const partnerLogin = async (req, res) => {
         res.status(401).send({message: "Something went wrong.", error: e.message});
     }
 }
-export const partnerLogout = async (req, res) => {
+
+// Logout
+export const logOut = async (req, res) => {
+    console.log("Logging out");
     res.clearCookie("sessionId");
     res.send({message: "Logging out."});
 }

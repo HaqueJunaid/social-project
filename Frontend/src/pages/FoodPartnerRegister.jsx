@@ -26,17 +26,26 @@ export default function FoodPartnerRegister() {
         }
       })
       .catch((err) => {
+        console.error("Registration error:", err);
+        const serverMessage =
+          err?.response?.data?.message ||
+          err.message ||
+          "Something went wrong. Try again.";
+
+        // If server returned a 409, show server-provided message (more accurate)
         if (err.response && err.response.status === 409) {
-          alert("User already exists. Please log in.");
+          alert(serverMessage);
         } else {
-          alert("Something went wrong. Try again.");
+          alert(serverMessage);
         }
       });
   };
 
   return (
     <main className="auth-root">
-  <div style={{position:'absolute', left:20, top:20}}><Logo size={28} /></div>
+      <div style={{ position: "absolute", left: 20, top: 20 }}>
+        <Logo size={28} />
+      </div>
       <form
         className="card auth-card"
         onSubmit={handleSubmit(onSubmit)}
@@ -50,7 +59,7 @@ export default function FoodPartnerRegister() {
             <span>Kitchen name</span>
             <input
               type="text"
-              name="kitchen"
+              name="kitchenName"
               {...register("kitchenName", { required: true, minLength: 6 })}
               placeholder="Ex: Sunny Bites"
             />

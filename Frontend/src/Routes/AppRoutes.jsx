@@ -6,12 +6,16 @@ import FoodPartnerLogin from "../pages/FoodPartnerLogin";
 import ReelScroller from "../pages/ReelScroller";
 import Landing from "../pages/Landing";
 import FoodPartnerAddListing from "../pages/FoodPartnerAddListing";
+import Home from "../pages/Home";
+import Profile from "../pages/Profile";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/foodmato" element={<Landing />} />
+        <Route path="/foodmato/home" element={<Home />} />
+        <Route path="/foodmato/profile" element={<Profile />} />
         <Route
           path="/foodmato/reels"
           element={
