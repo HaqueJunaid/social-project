@@ -2,12 +2,21 @@
   --bg: #f7f7fb;
   --card: #ffffff;
   --text: #0f1724;
+  --accent: #0ea5ff;
   --semi-trans: #ffffffe4;
   --muted: #6b7280;
   --primary: #0769ff;
   --primary-contrast: #ffffff10;
   --border: #e6e9ef;
   --shadow: 0 6px 18px rgba(12,20,40,0.06);
+  /* bottom-nav variables shared across the app so pages can react to nav height */
+  --bn-height: 72px;
+  --bn-bg: var(--card);
+  --bn-border: var(--border);
+  --bn-text: var(--text);
+  --bn-muted: rgba(107,114,128,0.95);
+  --bn-active: var(--primary);
+  --bn-shadow-up: 0 -10px 22px rgba(12,20,40,0.06);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,11 +24,18 @@
     --bg: #0b0f14;
     --card: #0f1720;
     --text: #e6eef8;
-  --semi-trans: #ffffff10;
+    --semi-trans: #ffffff10;
     --muted: #9aa6b2;
     --primary: #1e90ff;
     --primary-contrast: #061224;
     --border: #192028;
     --shadow: 0 6px 18px rgba(2,6,12,0.6);
+    /* bottom nav overrides in dark mode */
+    --bn-bg: var(--card);
+    --bn-border: #111827;
+    --bn-text: var(--text);
+    --bn-muted: rgba(154,166,178,0.9);
+    --bn-active: var(--primary);
+    --bn-shadow-up: 0 -10px 30px rgba(2,6,12,0.6);
   }
 }

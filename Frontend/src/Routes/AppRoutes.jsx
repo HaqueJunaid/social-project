@@ -5,12 +5,16 @@ import FoodPartnerRegister from "../pages/FoodPartnerRegister";
 import FoodPartnerLogin from "../pages/FoodPartnerLogin";
 import ReelScroller from "../pages/ReelScroller";
 import Landing from "../pages/Landing";
+import Home from "../pages/Home";
 import FoodPartnerAddListing from "../pages/FoodPartnerAddListing";
+import Profile from "../pages/Profile";
+import BottomNav from "../components/BottomNav";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/foodmato" element={<Landing />} />
         <Route
           path="/foodmato/reels"
@@ -20,6 +24,7 @@ function AppRoutes() {
             </>
           }
         />
+        <Route path="/foodmato/profile" element={<Profile />} />
         <Route path="/foodmato/new" element={<FoodPartnerAddListing />} />
         <Route path="/foodmato/user/registration" element={<UserRegister />} />
         <Route path="/foodmato/user/login" element={<UserLogin />} />
@@ -29,6 +34,7 @@ function AppRoutes() {
         />
         <Route path="/foodmato/partner/login" element={<FoodPartnerLogin />} />
       </Routes>
+      <BottomNav />
     </BrowserRouter>
   );
 }

@@ -1,0 +1,57 @@
+:root {
+  --bn-height: 64px;
+  --bn-bg: var(--card);
+  --bn-border: var(--border);
+  --bn-text: var(--text);
+  --bn-muted: var(--muted);
+  --bn-active: var(--primary);
+  --bn-shadow: 0 -6px 18px rgba(12,20,40,0.06);
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--bn-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bn-bg);
+  border-top: 1px solid var(--bn-border);
+  box-shadow: var(--bn-shadow);
+  z-index: 60;
+}
+
+.bn-item {
+  --icon-size: 30px;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--bn-muted);
+  text-decoration: none;
+  margin-top: -2px;
+  position: relative;
+}
+
+.bn-item .bn-icon {
+  font-size: var(--icon-size);
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bn-item.active {
+  color: var(--bn-active);
+}
+
+/* respect iOS safe-area inset if present */
+.bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
+
+/* slightly larger touch target on mobile */
+@media (max-width: 768px) {
+  .bottom-nav { height: calc(var(--bn-height) + env(safe-area-inset-bottom)); }
+  .bn-item { font-size: 13px; }
+}

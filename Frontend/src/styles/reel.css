@@ -13,6 +13,8 @@ body,
 .reels {
   height: 100vh;
   overflow-y: auto;
+  /* ensure bottom area isn't covered by the fixed bottom nav */
+  padding-bottom: calc(var(--bn-height) + 12px);
   scroll-snap-type: y mandatory;
 }
 
@@ -55,8 +57,10 @@ body,
   position: absolute;
   left: 14px;
   right: 80px;
-  bottom: 24px;
+  /* leave a bit more space above the nav so content is readable */
+  bottom: calc(var(--bn-height) + 18px);
   color: var(--primary-contrast);
+  z-index: 30;
 }
 
 .profile {
