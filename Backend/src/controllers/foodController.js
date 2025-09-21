@@ -30,3 +30,9 @@ export const getFood = async (req, res) => {
     let allData = await foodModel.find({}).populate("owner");
     res.status(200).send(allData);
 }
+
+export const getFoodById = async (req, res) => {
+    let { partnerId } = req.params;
+    let allData = await foodModel.find({ owner: partnerId }).populate("owner");
+    res.status(200).send(allData);
+}

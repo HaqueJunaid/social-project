@@ -23,7 +23,17 @@ const partnerSchema = new Schema({
         type: String,
         trim: true,
         required: true
-    }
+    },
+    followers: [{
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        default: []
+    }],
+    following: [{
+        type: Schema.Types.ObjectId,
+        ref: "partner",
+        default: []
+    }],
 })
 
 partnerSchema.pre("save", async function() {
