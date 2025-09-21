@@ -12,6 +12,7 @@ export default function ReelScroller() {
     fetch("http://localhost:3000/api/food")
       .then((res) => res.json())
         .then((data) => {
+          console.log("Fetched posts:", data);
             setReels(data);
         })
     .catch((err) => {
@@ -98,6 +99,7 @@ export default function ReelScroller() {
           const key = (r && (r._id || r.id)) ? (r._id || r.id) : index;
           const src = r && (r.video || r.mediaUrl || r.url);
           const ownerName = r?.owner?.kitchenName || r?.user || 'unknown';
+          const ownerId = r?.owner?._id;
           const caption = r?.description || r?.caption || '';
 
           return (
@@ -121,7 +123,7 @@ export default function ReelScroller() {
                     <div className="circle"></div>
                   </div>
                   <div className="meta">
-                    <div className="user">@{ownerName}</div>
+                    <NavLink to={`/foodmato/partner/${ownerId}`} className="user">@{ownerName}</NavLink>
                     <div className="caption">{caption}</div>
                   </div>
                 </div>

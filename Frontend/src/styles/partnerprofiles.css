@@ -1,0 +1,82 @@
+@import "./variables.css";
+
+.partner-page {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.top {
+    padding: 14px 18px;
+}
+
+.top > h2{
+    margin-bottom: 10px;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.text-image {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+}
+
+.left {
+    min-width: 90px;
+    min-height: 90px;
+    border: 1px solid var(--border);
+    border-radius: 100%;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.right > h1 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.right .stats {
+    display: flex;
+    gap: 25px;
+}
+
+.right .stats .stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat .label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.stat .number {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 15px 0 0 0;
+}
+
+.posts {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post {
+    flex: 1;
+    border: 1px solid var(--border);
+    min-width: 120px;
+    height: 160px;
+}

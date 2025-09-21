@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import FoodPartnerAddListing from "../pages/FoodPartnerAddListing";
 import Profile from "../pages/Profile";
 import BottomNav from "../components/BottomNav";
+import PartnerProfiles from "../pages/PartnerProfiles";
 
 function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/foodmato" element={<Landing />} />
+        <Route path="/foodmato/partner/:id" element={<PartnerProfiles />} />
         <Route
           path="/foodmato/reels"
           element={
