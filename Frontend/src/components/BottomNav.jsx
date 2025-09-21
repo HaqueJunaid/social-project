@@ -4,10 +4,12 @@ import "../styles/bottomnav.css";
 
 function getCookie(name) {
   const cookies = document.cookie.split("; ");
+  
   for (let cookie of cookies) {
     const [key, value] = cookie.split("=");
     if (key === name) return value;
   }
+
   return null;
 }
 
@@ -18,6 +20,7 @@ export default function BottomNav() {
   // exact paths to hide and path prefixes to hide
   const excludedExact = ["/foodmato", "/dashboard"];
   const excludedStarts = ["/foodmato/user", "/foodmato/partner"];
+  
   const isLogged = Boolean(getCookie("sessionId"));
 
   if (!isLogged) return null;
@@ -61,7 +64,7 @@ export default function BottomNav() {
       </NavLink>
 
       <NavLink
-        to="/foodmato/profile"
+        to={`/foodmato/profile/`}
         aria-label="Profile"
         className={({ isActive }) => (isActive ? "bn-item active" : "bn-item")}
       >

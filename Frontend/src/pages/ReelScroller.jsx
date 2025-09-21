@@ -123,7 +123,7 @@ export default function ReelScroller() {
                     <div className="circle"></div>
                   </div>
                   <div className="meta">
-                    <NavLink to={`/foodmato/partner/${ownerId}`} className="user">@{ownerName}</NavLink>
+                    <NavLink to={`/foodmato/profile/${ownerId}`} className="user">@{ownerName}</NavLink>
                     <div className="caption">{caption}</div>
                   </div>
                 </div>

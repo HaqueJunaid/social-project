@@ -17,7 +17,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/foodmato" element={<Landing />} />
-        <Route path="/foodmato/partner/:id" element={<PartnerProfiles />} />
+        <Route path="/foodmato/profile/:id" element={<PartnerProfiles />} />
         <Route
           path="/foodmato/reels"
           element={
